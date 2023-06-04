@@ -25,7 +25,7 @@
 8.<h4 align ="center">[`Assignment No. 8 - OBST`](https://github.com/Akshaykk12/SE-4/blob/main/OBST.cpp)</h4>
 
 9)A Dictionary stores keywords and its meanings. Provide facility for adding new keywords, deleting keywords, updating values of any entry. Provide facility to display whole data sorted in ascending/ Descending order. Also find how many maximum comparisons may require for finding any keyword. Use Height balance tree and find the complexity for finding a keyword
-9.<h4 align ="center">[`Assignment No. 9 - Dictionay AVL`](https://github.com/Akshaykk12/SE-4/blob/main/Avl.cpp)</h4>
+9.<h4 align ="center">[`Assignment No. 9 - Dictionay AVL`](https://github.com/Akshaykk12/SE-4/blob/main/AVL.cpp)</h4>
 
 10)Consider a scenario for Hospital to cater services to different kinds of patients as Serious (top priority), b) non-serious (medium priority), c) General Checkup (Least priority). Implement the priority queue to cater services to the patients.
 10.<h4 align ="center">[`Assignment No. 10 - Priority Queue`](https://github.com/Akshaykk12/SE-4/blob/main/PriorityQueue.cpp)</h4>
