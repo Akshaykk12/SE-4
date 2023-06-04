@@ -1,189 +1,143 @@
-#include<iostream>
-#include<math.h>
+#include <iostream>
 using namespace std;
-
-struct Bstnode
+// Tree Node Definition
+class node
 {
- int data;
- Bstnode *left = NULL;
- Bstnode *right = NULL;
- 
-};
-
-class Btree
-{
- 
-  int n;
-  int x;
-  int flag;
-  
 public:
-  Bstnode * root;
- Btree()
- {
-  root = NULL;
- }
- 
- Bstnode *GetNewNode(int in_data)
- {
-  Bstnode * ptr = new Bstnode();
-  ptr->data = in_data;
-  ptr->left = NULL;
-  ptr->right = NULL;
-  return ptr;
- }
- 
- Bstnode *insert( Bstnode *temp , int in_data)
- {
-  if( temp == NULL )
-  {
-   temp = GetNewNode(in_data);
-  }
-  else if( temp->data > in_data)
-  {
-   temp->left = insert(temp->left , in_data);
-  }
-  else
-  {
-   temp->right = insert( temp->right , in_data);
-  }
-  return temp;
- }
- 
- void input()
- {
-  cout<<"ENTER NUMBER OF ELEMENTS IN THE BST : ";
-  cin>>n;
-  for(int i = 0 ; i < n ; i++)
-  {
-   cout<<"NUMBER = ";
-   cin>>x;
-   root = insert(root , x);
-  }
- }
- 
- int search(Bstnode *temp ,int in_data)
- {
-  if( temp != NULL)
-  {
-   if(temp->data == in_data)
-   {
-    cout<<":-- RECORD FOUND --:"<<endl;
-    return 1;
-   }
-   else if(in_data < temp->data)
-   {
-    this->search(temp->left, in_data);
-   }
-   else if(in_data > temp->data)
-   {
-    this->search(temp->left , in_data);
-   }
-  }
-  else
-  {
-    return 0;
-  }
- }
- 
- 
- void minvalue(Bstnode *temp)
- {
-  while(temp->left != NULL)
-  {
-   temp = temp->left;
-  }
-  cout<<"MINIMUM VALUE = "<<temp->data<<endl;
- }
+    char val;
+    node *left, *right;
+    node()
+    {
+        this->left = NULL;
+        this->right = NULL;
+    }
+    // Constructor Method
+    node(char val)
+    {
+        this->val = val;
+        this->left = NULL;
+        this->right = NULL;
+    }
+};
+// Stack to hold the latest node
+class Stack
+{
+public:
+    node *treeNode;
+    Stack *next;
+    // Constructor Method
+    Stack(node *treeNode)
+    {
+        this->treeNode = treeNode;
+        next = NULL;
+    }
+};
+class ExpressionTree
+{
+private:
+    Stack *top;
+public:
+    // Constructor Method
+    ExpressionTree()
+    {
+        top = NULL;
+    }
+    void push(node *ptr);
+    void insert(char val);
+    void inOrder(node *root);
+    void postOrder(node *root);
    
- void mirror(Bstnode *temp)
- {
-  if(temp == NULL)
-  {
-   return;
-  }
-  else
-  {
-   Bstnode *ptr;
-   mirror(temp->left);
-   mirror(temp->right);
-   ptr = temp->left;
-   temp->left = temp->right;
-   temp->right = ptr; 
-  }
- }
- 
- void display()
- {
-  cout<<endl<<"--- INORDER TRAVERSAL ---"<<endl;
-  inorder(root);
-  cout<<endl;
-  cout<<endl<<"--- POSTORDER TRAVERSAL ---"<<endl;
-  postorder(root);
-  cout<<endl;
-  cout<<endl<<"--- PREORDER TRAVERSAL ---"<<endl;
-  preorder(root);
-  cout<<endl;
-  
- }
- 
- void inorder(Bstnode *temp)
- {
-  if(temp != NULL)
-  {
-   inorder(temp->left);
-   cout<<temp->data<<"  ";
-   inorder(temp->right);
-  }
- } 
- 
- void postorder(Bstnode *temp)
- {
-  if(temp != NULL)
-  {
-   postorder(temp->left);
-   postorder(temp->right);
-   cout<<temp->data<<" ";
-  }
- }
- 
- void preorder(Bstnode *temp)
- {
-  if(temp != NULL)
-  {
-   cout<<temp->data<<" ";
-   preorder(temp->left);
-   preorder(temp->right);
-  }
- } 
- 
- int depth(Bstnode *temp)
- {
-  if(temp == NULL) 
-   return 0;
-  return (max((depth(temp->left)),(depth(temp->right))) +1);  
- }
+    node *pop()
+    {
+        node *ptr = top->treeNode;
+        top = top->next;
+        return ptr;
+    }
+    node *treetoproot()
+    {
+        return top->treeNode;
+    }
+    
+    // function to check if operand
+    bool isOperand(char ch)
+    {
+        return ch >= '0' && ch <= '9' || ch>='A' && ch<='Z' || ch>='a' && ch<='z';
+    }
+    // function to check if operator
+    bool isOperator(char ch)
+    {
+        return ch == '+' || ch == '-' || ch == '*' || ch == '/';
+    }
+    // function to construct expression Tree
+    void construct(string eqn)
+    {
+        for (int i = eqn.length() - 1; i >= 0; i--)
+            insert(eqn[i]);
+    }
+    
 };
 
+
+ // function to push a node in stack
+void ExpressionTree::push(node *ptr)
+    {
+        if (top == NULL)
+            top = new Stack(ptr);
+        else
+        {
+            Stack *nptr = new Stack(ptr);
+            nptr->next = top;
+            top = nptr;
+        }
+    }
+    
+// function to insert character
+void ExpressionTree::insert(char val)
+    {
+        // If the encountered character is Number make a node an push it on stack
+        if (isOperand(val))
+        {
+            node *nptr = new node(val);
+            push(nptr);
+        }
+        // else if it is operator then make a node and left and
+        else if (isOperator(val))
+        {
+            node *nptr = new node(val);
+            nptr->left = pop();
+            nptr->right = pop();
+            push(nptr);
+        }
+    }
+    
+void ExpressionTree::inOrder(node *root)
+    {
+        if (root != NULL)
+        {
+            inOrder(root->left);
+            cout<<root->val;
+            inOrder(root->right);
+        }
+    }
+void ExpressionTree::postOrder(node *root)
+    {
+        if (root != NULL)
+        {
+            postOrder(root->left);
+            postOrder(root->right);
+            cout<<root->val;
+        }
+    }
 int main()
 {
- Btree obj;
- obj.input();
- obj.display();
- int a = 0;
- a = obj.search(obj.root,10);
- if( a == 0)
- {
-  cout<<"ELEMENT NOT FOUND"<<endl;
- }
- else
-  cout<<"ELEMENT FOUND"<<endl;
- cout<<endl<<a<<endl;
- obj.minvalue(obj.root);
- obj.mirror(obj.root);
- obj.inorder(obj.root);
- //int d ;
- cout<<endl<<obj.depth(obj.root);
- //cout<<endl<<d<<endl;
- return 0;
-}  
+    string exp;
+    ExpressionTree et;
+    cout<<"Enter expression in Prefix form: ";
+    cin>>exp;
+    et.construct(exp);
+    cout<<"\nIn-order Traversal of Expression Tree : ";
+    et.inOrder(et.treetoproot());
+    cout<<"\nPost-order Traversal of Expression Tree : ";
+    et.postOrder(et.treetoproot());
+    return 0;
+};
