@@ -16,7 +16,7 @@
 5.<h4 align ="center">[`Assignment No. 5 - Dictionary BST`](https://github.com/Akshaykk12/SE-4/blob/main/DictionaryBST.cpp)</h4>
 
 6)There are flight paths between cities. If there is a flight between city A and city B then there is an edge between the cities. The cost of the edge can be the time that flight take to reach city B from A, or the amount of fuel used for the journey. Represent this as a graph. The node can be represented by airport name or name of the city. Use adjacency list representation of the graph or use adjacency matrix representation of the graph. Check whether the graph is connected or not. Justify the storage representation used.
-6.<h4 align ="center">[`Assignment No. 6 - Flight Path`](https://github.com/Akshaykk12/SE-4/blob/main/Flightpath.cpp)</h4>
+6.<h4 align ="center">[`Assignment No. 6 - Flight Path`](https://github.com/Akshaykk12/SE-4/blob/main/FlightPath.cpp)</h4>
 
 7)You have a business with several offices; you want to lease phone lines to connect them up with each other; and the phone company charges different amounts of money to connect different pairs of cities. You want a set of lines that connects all your offices with a minimum total cost. Solve the problem by suggesting appropriate data structures.
 7.<h4 align ="center">[`Assignment No. 7 - Prims`](https://github.com/Akshaykk12/SE-4/blob/main/Prims.cpp)</h4>
