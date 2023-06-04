@@ -34,4 +34,4 @@
 11.<h4 align ="center">[`Assignment No. 11 - Sequential File`](https://github.com/Akshaykk12/SE-4/blob/main/SequentialFile.cpp)</h4>
 
 12)Department maintains a student information. The file contains roll number, name, division and address. Allow user to add, delete information of student. Display information of particular employee. If record of student does not exist an appropriate message is displayed. If it is, then the system displays the student details. Use sequential file to main the data.
-12.<h4 align ="center">[`Assignment No. 12 - Index Sequential File`](https://github.com/Akshaykk12/SE-4/blob/main/IndexSequencialFilee.cpp)</h4>
+12.<h4 align ="center">[`Assignment No. 12 - Index Sequential File`](https://github.com/Akshaykk12/SE-4/blob/main/IndexSequentialFilee.cpp)</h4>
